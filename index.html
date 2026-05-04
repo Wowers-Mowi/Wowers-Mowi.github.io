@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plan de vuelo</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="apple-touch-icon" href="./assets/favicon.png">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="wizard-panel" aria-labelledby="app-title">
+        <div class="brand-row">
+          <img class="mini-logo" src="./assets/favicon.png" alt="" aria-hidden="true">
+          <div>
+            <h1 id="app-title">Plan de vuelo</h1>
+            <p id="utc-readout" class="utc-readout">UTC --</p>
+          </div>
+        </div>
+
+        <div class="progress-wrap" aria-label="Progreso">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <form id="wizard-form" autocomplete="off">
+          <p id="step-count" class="step-count"></p>
+          <h2 id="question-title"></h2>
+          <div id="question-control" class="question-control"></div>
+          <div id="question-help" class="question-help"></div>
+
+          <div class="nav-row">
+            <button id="back-btn" class="secondary-btn" type="button">
+              <span aria-hidden="true">&lt;</span>
+              Anterior
+            </button>
+            <button id="next-btn" class="primary-btn" type="submit">
+              Siguiente
+              <span aria-hidden="true">&gt;</span>
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-labelledby="preview-title">
+        <div class="preview-head">
+          <div>
+            <h2 id="preview-title">Vista previa</h2>
+            <p id="preview-status"></p>
+          </div>
+          <div class="preview-actions">
+            <button id="settings-btn" class="settings-btn" type="button">Opciones</button>
+            <button id="reset-btn" class="icon-btn" type="button" title="Reiniciar formulario" aria-label="Reiniciar formulario">
+              <svg class="refresh-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h8V3l-3.35 3.35z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="canvas-stage">
+          <canvas id="flight-plan-canvas" width="1200" height="900"></canvas>
+        </div>
+
+        <div class="copy-row">
+          <button id="copy-btn" class="copy-btn" type="button" disabled>
+            Copiar imagen al portapapeles
+          </button>
+          <a id="download-link" class="download-link" href="#" download="plan-de-vuelo.png">Descargar PNG</a>
+          <button id="copy-atc-btn" class="atc-btn" type="button" disabled>
+            Copiar Comunicacion ATC
+          </button>
+        </div>
+        <p id="copy-message" class="copy-message" role="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <div id="settings-modal" class="modal-backdrop" hidden>
+      <section class="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <header class="settings-head">
+          <div>
+            <h2 id="settings-title">Personalizar opciones</h2>
+            <p>Los cambios se guardan solo en este navegador.</p>
+          </div>
+          <button id="settings-close-btn" class="icon-btn" type="button" title="Cerrar menu" aria-label="Cerrar menu">X</button>
+        </header>
+
+        <label class="field-label">
+          Pregunta
+          <select id="settings-question-select" class="select-input"></select>
+        </label>
+
+        <p id="settings-hint" class="settings-hint"></p>
+        <div id="settings-options-list" class="settings-options-list"></div>
+
+        <div class="settings-footer">
+          <button id="settings-add-btn" class="primary-btn" type="button">Agregar opcion</button>
+          <button id="settings-save-btn" class="primary-btn" type="button">Guardar</button>
+          <button id="settings-restore-btn" class="secondary-btn" type="button">Restaurar pregunta</button>
+        </div>
+        <p id="settings-status" class="settings-status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
